@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bingo-soft/graphp.png?branch=master)](https://travis-ci.org/bingo-soft/graphp)
+
 # Graphp
 
 Graphp is a port of Java library [JGraphT](https://github.com/jgrapht/jgrapht) to PHP. It provides mathematical graph-theory objects and algorithms. 
