@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+  - hhvm
+
+dist: trusty
+
+sudo: false
+
+install:
+  - composer install --no-interaction
+
+script:
+  - vendor/bin/phpunit --coverage-text
