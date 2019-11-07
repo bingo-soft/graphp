@@ -12,6 +12,8 @@ interface VertexInterface
     /**
      * Check if two vertices are equal
      *
+     * @param VertexInterface $other - other vertex to be compared
+     *
      * @return bool
      */
     public function equals(VertexInterface $other): bool;

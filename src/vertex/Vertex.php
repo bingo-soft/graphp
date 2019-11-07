@@ -10,14 +10,14 @@ namespace graphp\vertex;
 class Vertex implements VertexInterface
 {
     /**
-     * Unique vertex hash
+     * The vertex unique hash
      *
      * @var string
      */
     private $hash;
 
     /**
-     * Vertex value
+     * The vertex value
      *
      * @var mixed
      */
@@ -37,7 +37,7 @@ class Vertex implements VertexInterface
     /**
      * Check if two vertices are equal
      *
-     * @param VertexInterface $other - other vertex to compare
+     * @param VertexInterface $other - other vertex to be compared
      */
     public function equals(VertexInterface $other): bool
     {
@@ -45,7 +45,7 @@ class Vertex implements VertexInterface
     }
     
     /**
-     * Get vertex hash
+     * Get the vertex hash
      *
      * @return string
      */
@@ -55,7 +55,7 @@ class Vertex implements VertexInterface
     }
     
     /**
-     * Get vertex value
+     * Get the vertex value
      *
      * @return mixed
      */
@@ -65,7 +65,7 @@ class Vertex implements VertexInterface
     }
     
     /**
-     * Get vertex string representation
+     * Get the vertex string representation
      *
      * @return string
      */

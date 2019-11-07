@@ -2,6 +2,8 @@
 
 namespace graphp\vertex;
 
+use ArrayObject;
+
 /**
  * Class VertexSet
  *
