@@ -9,6 +9,7 @@
         "name": "Bingo-Soft",
         "email": "bingosoft@bk.ru"
     }],
+    "license": "LGPL-2.1-only",
     "require-dev": {
         "doctrine/coding-standard": "^6.0",
         "squizlabs/php_codesniffer": "3.*",
