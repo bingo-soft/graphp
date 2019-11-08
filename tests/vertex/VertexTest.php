@@ -30,6 +30,10 @@ class VertexTest extends TestCase
         $vm->put($vertex, $ec);
         $this->assertNotNull($vm->get($vertex));
         $this->assertNull($vm->get($vertex2));
+
+        $vertices = $vm->keySet();
+        $this->assertCount(1, $vertices);
+        $this->assertInstanceOf(Vertex::class, $vertices[0]);
     }
 
     public function testVertexsetCreation(): void

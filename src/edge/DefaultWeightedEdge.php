@@ -2,6 +2,7 @@
 
 namespace graphp\edge;
 
+use graphp\graph\GraphInterface;
 use graphp\vertex\VertexInterface;
 
 /**
@@ -14,16 +15,16 @@ class DefaultWeightedEdge extends DefaultEdge
     /**
      * Weight of the edge
      *
-     * @var mixed
+     * @var double
      */
-    protected $weight;
+    protected $weight = GraphInterface::DEFAULT_EDGE_WEIGHT;
 
     /**
      * Get weight of the edge
      *
      * @return mixed
      */
-    protected function getWeight()
+    protected function getWeight(): double
     {
         return $this->weight;
     }

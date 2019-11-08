@@ -45,6 +45,13 @@ interface GraphTypeInterface
     public function isAllowingCycles(): bool;
 
     /**
+     * Check if self-loops are allowed in the graph
+     *
+     * @return bool
+     */
+    public function isAllowingSelfLoops(): bool;
+
+    /**
      * Check if weighted edges are allowed in the graph
      *
      * @return bool

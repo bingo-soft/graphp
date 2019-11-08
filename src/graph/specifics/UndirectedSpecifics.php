@@ -11,11 +11,11 @@ use graphp\vertex\VertexMap;
 use graphp\vertex\VertexSet;
 
 /**
- * Class DirectedSpecifics
+ * Class UndirectedSpecifics
  *
  * @package graphp\graph\specifics
  */
-class DirectedSpecifics implements SpecificsInterface
+class UndirectedSpecifics implements SpecificsInterface
 {
     /**
      * The graph
@@ -39,7 +39,7 @@ class DirectedSpecifics implements SpecificsInterface
     protected $edgeSetFactory;
 
     /**
-     * Construct a new directed specifics
+     * Construct a new undirected specifics
      *
      * @param GraphInterface $graph - the graph for which these specifics are for
      * @param EdgeSetFactoryInterface $edgeSetFactory - the edge set factory, used by the graph
@@ -87,12 +87,12 @@ class DirectedSpecifics implements SpecificsInterface
             $this->graph->containsVertex($sourceVertex)
             && $this->graph->containsVertex($targetVertex)
         ) {
-            $allEdges = $this->getEdgeContainer($sourceVertex)->getOutgoing();
+            $edges = $this->getEdgeContainer($sourceVertex)->getEdges();
             
-            foreach ($allEdges as $edge) {
-                $equals = $this->graph->getEdgeTarget($edge)->equals($targetVertex);
+            foreach ($edges as $edge) {
+                $equals = $this->isEqualStraightOrInverted($sourceVertex, $targetVertex, $edge);
                 
-                if ($equals && !in_array($edge, $edges)) {
+                if ($equals) {
                     $edges[] = $edge;
                 }
             }
@@ -115,10 +115,10 @@ class DirectedSpecifics implements SpecificsInterface
             $this->graph->containsVertex($sourceVertex)
             && $this->graph->containsVertex($targetVertex)
         ) {
-            $edges = $this->getEdgeContainer($sourceVertex)->getOutgoing();
+            $edges = $this->getEdgeContainer($sourceVertex)->getEdges();
             
             foreach ($edges as $edge) {
-                $equals = $this->graph->getEdgeTarget($edge)->equals($targetVertex);
+                $equals = $this->isEqualStraightOrInverted($sourceVertex, $targetVertex, $edge);
                 
                 if ($equals) {
                     return $edge;
@@ -138,22 +138,7 @@ class DirectedSpecifics implements SpecificsInterface
      */
     public function edgesOf(VertexInterface $vertex): array
     {
-        $edges = $this->getEdgeContainer($vertex)->getOutgoing();
-        $edges = array_merge($edges, $this->getEdgeContainer($vertex)->getIncoming());
-        
-        //remove only one copy of self-loop
-        if ($this->graph->getType()->isAllowingSelfLoops()) {
-            $loops = array_unique($this->getAllEdges($vertex, $vertex));
-            
-            foreach ($edges as $key => $edge) {
-                if (($id = array_search($edge, $loops)) !== false) {
-                    unset($edges[$key]);
-                    unset($loops[$id]);
-                }
-            }
-        }
-        
-        return $edges;
+        return $this->getEdgeContainer($vertex)->getEdges();
     }
 
     /**
@@ -166,8 +151,11 @@ class DirectedSpecifics implements SpecificsInterface
         $sourceVertex = $this->graph->getEdgeSource($edge);
         $targetVertex = $this->graph->getEdgeTarget($edge);
         
-        $this->getEdgeContainer($sourceVertex)->addOutgoingEdge($edge);
-        $this->getEdgeContainer($targetVertex)->addIncomingEdge($edge);
+        $this->getEdgeContainer($sourceVertex)->addEdge($edge);
+        
+        if (!$sourceVertex->equals($targetVertex)) {
+            $this->getEdgeContainer($targetVertex)->addEdge($edge);
+        }
     }
 
     /**
@@ -180,8 +168,11 @@ class DirectedSpecifics implements SpecificsInterface
         $sourceVertex = $this->graph->getEdgeSource($edge);
         $targetVertex = $this->graph->getEdgeTarget($edge);
         
-        $this->getEdgeContainer($sourceVertex)->removeOutgoingEdge($edge);
-        $this->getEdgeContainer($targetVertex)->removeIncomingEdge($edge);
+        $this->getEdgeContainer($sourceVertex)->removeEdge($edge);
+        
+        if (!$sourceVertex->equals($targetVertex)) {
+            $this->getEdgeContainer($targetVertex)->removeEdge($edge);
+        }
     }
 
     /**
@@ -193,7 +184,7 @@ class DirectedSpecifics implements SpecificsInterface
      */
     public function outgoingEdgesOf(VertexInterface $vertex): array
     {
-        return $this->getEdgeContainer($vertex)->getOutgoing();
+        return $this->getEdgeContainer($vertex)->getEdges();
     }
 
     /**
@@ -205,7 +196,7 @@ class DirectedSpecifics implements SpecificsInterface
      */
     public function incomingEdgesOf(VertexInterface $vertex): array
     {
-        return $this->getEdgeContainer($vertex)->getIncoming();
+        return $this->getEdgeContainer($vertex)->getEdges();
     }
 
     /**
@@ -217,7 +208,23 @@ class DirectedSpecifics implements SpecificsInterface
      */
     public function degreeOf(VertexInterface $vertex): int
     {
-        return $this->inDegreeOf($vertex) + $this->outDegreeOf($vertex);
+        if ($this->graph->getType()->isAllowingSelfLoops()) {
+            $degree = 0;
+            $edges = $this->getEdgeContainer($vertex)->getEdges();
+
+            foreach ($edges as $edge) {
+                //if it is a loop, then count twice
+                if ($graph->getEdgeSource($edge)->equals($this->graph->getEdgeTarget($edge))) {
+                    $degree += 2;
+                } else {
+                    $degree += 1;
+                }
+            }
+
+            return $degree;
+        } else {
+            $this->getEdgeContainer($vertex)->edgeCount();
+        }
     }
 
     /**
@@ -229,7 +236,7 @@ class DirectedSpecifics implements SpecificsInterface
      */
     public function inDegreeOf(VertexInterface $vertex): int
     {
-        return count($this->getEdgeContainer($vertex)->getIncoming());
+        return $this->degreeOf($vertex);
     }
 
     /**
@@ -241,7 +248,7 @@ class DirectedSpecifics implements SpecificsInterface
      */
     public function outDegreeOf(VertexInterface $vertex): int
     {
-        return count($this->getEdgeContainer($vertex)->getOutgoing());
+        return $this->degreeOf($vertex);
     }
 
     /**
@@ -251,15 +258,38 @@ class DirectedSpecifics implements SpecificsInterface
      *
      * @return DirectedEdgeContainer
      */
-    public function getEdgeContainer(VertexInterface $vertex): DirectedEdgeContainer
+    public function getEdgeContainer(VertexInterface $vertex): UndirectedEdgeContainer
     {
         $ec = $this->vertexMap->get($vertex);
         
         if (is_null($ec)) {
-            $ec = new DirectedEdgeContainer($this->edgeSetFactory, $vertex);
+            $ec = new UndirectedEdgeContainer($this->edgeSetFactory, $vertex);
             $this->vertexMap->put($vertex, $ec);
         }
         
         return $ec;
+    }
+
+    /**
+     * Check if both vertices are touching the edge
+     *
+     * @param VertexInterface $sourceVertex - source vertex
+     * @param VertexInterface $targetVertex - target vertex
+     * @param EdgeInterface $edge - the edge
+     *
+     * @return bool
+     */
+    private function isEqualStraightOrInverted(
+        VertexInterface $sourceVertex,
+        VertexInterface $targetVertex,
+        EdgeInterface $edge
+    ): bool {
+        $straigt = $sourceVertex->equals($this->graph->getEdgeSource($edge))
+                   && $targetVertex->equals($this->graph->getEdgeTarget($edge));
+                   
+        $inverted = $targetVertex->equals($this->graph->getEdgeSource($edge))
+                   && $sourceVertex->equals($this->graph->getEdgeTarget($edge));
+                   
+        return $straigt || $inverted;
     }
 }

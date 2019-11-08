@@ -57,7 +57,7 @@ final class UndirectedEdgeContainer implements EdgeContainerInterface
         }
     }
     
-     /**
+    /**
      * Get all container edges
      *
      * @return array
@@ -65,5 +65,15 @@ final class UndirectedEdgeContainer implements EdgeContainerInterface
     public function getEdges(): array
     {
         return $this->vertexEdges;
+    }
+
+    /**
+     * Get the number of edges
+     *
+     * @return int
+     */
+    public function edgeCount(): int
+    {
+        return count($this->vertexEdges);
     }
 }

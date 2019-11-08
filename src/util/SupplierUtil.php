@@ -23,11 +23,11 @@ class SupplierUtil
      *
      * @param string $className - edge class name
      *
-     * @return DefaultEdge|DefaultWeightedEdge
+     * @return SupplierInterface
      */
-    public static function createSupplier(string $className)
+    public static function createSupplier(string $className): SupplierInterface
     {
-        return new $className();
+        return new Supplier($className);
     }
 
     /**
@@ -35,18 +35,38 @@ class SupplierUtil
      *
      * @return DefaultEdge
      */
-    public static function createDefaultEdgeSupplier(): DefaultEdge
+    public static function createDefaultEdgeSupplier(): SupplierInterface
     {
         return self::createSupplier(DefaultEdge::class);
     }
 
-     /**
+    /**
      * Create a default weighted edge supplier
      *
      * @return DefaultWeightedEdge
      */
-    public static function createDefaultWeightedEdgeSupplier(): DefaultWeightedEdge
+    public static function createDefaultWeightedEdgeSupplier(): SupplierInterface
     {
         return self::createSupplier(DefaultWeightedEdge::class);
+    }
+
+    /**
+     * Create an integer supplier
+     *
+     * @return SupplierInterface
+     */
+    public static function createIntegerSupplier(int $start = 0): SupplierInterface
+    {
+        return new IntegerSupplier($start);
+    }
+
+    /**
+     * Create a string supplier
+     *
+     * @return SupplierInterface
+     */
+    public static function createStringSupplier(int $start = 0): SupplierInterface
+    {
+        return new StringSupplier($start);
     }
 }

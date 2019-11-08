@@ -104,7 +104,7 @@ class DirectedEdgeContainer implements EdgeContainerInterface
     {
         foreach ($this->incoming as $key => $e) {
             if ($edge->equals($e)) {
-                unset($this->outgoing[$key]);
+                unset($this->incoming[$key]);
                 break;
             }
         }

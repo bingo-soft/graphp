@@ -12,6 +12,8 @@ use graphp\edge\EdgeContainerInterface;
  */
 class VertexMap extends ArrayObject
 {
+    private $vertices = [];
+
     /**
      * Construct a vertex map. It maps vertices to corresponding edge containers
      *
@@ -22,6 +24,11 @@ class VertexMap extends ArrayObject
         parent::__construct($input, ArrayObject::ARRAY_AS_PROPS);
     }
 
+    /**
+     * Get the edge container of the specified vertex
+     *
+     * @return null|EdgeContainerInterface
+     */
     public function get(VertexInterface $vertex): ?EdgeContainerInterface
     {
         $id = $vertex->getHash();
@@ -31,9 +38,37 @@ class VertexMap extends ArrayObject
         return null;
     }
 
-    public function put(VertexInterface $vertex, EdgeContainerInterface $ec): void
+    /**
+     * Put a new value to vertexmap
+     *
+     * @param VertexInterface $vertex - the vertex
+     * @param EdgeContainerInterface $ec - the edge container
+     */
+    public function put(VertexInterface $vertex, ?EdgeContainerInterface $ec = null): void
     {
         $id = $vertex->getHash();
         parent::offsetSet($id, $ec);
+        $this->vertices[$id] = $vertex;
+    }
+
+    /**
+     * Unset VertexMap value by key
+     *
+     * @param mixed $offset - array offset
+     */
+    public function offsetUnset($offset): void
+    {
+        parent::offsetSet($offset);
+        unset($this->vertices[$offset]);
+    }
+
+    /**
+     * Get array of vertices
+     *
+     * @return array
+     */
+    public function keySet(): VertexSet
+    {
+        return new VertexSet(array_values($this->vertices));
     }
 }

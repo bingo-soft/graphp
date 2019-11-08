@@ -49,6 +49,16 @@ class DefaultEdge implements EdgeInterface
     {
         return $this->hash == $other->getHash();
     }
+
+    /**
+     * Get the edge hash
+     *
+     * @return string
+     */
+    public function getHash(): string
+    {
+        return $this->hash;
+    }
     
     /**
      * Get the edge source vertex

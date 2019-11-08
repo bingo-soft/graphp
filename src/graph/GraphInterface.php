@@ -5,6 +5,7 @@ namespace graphp\graph;
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSetFactoryInterface;
 use graphp\vertex\VertexInterface;
+use graphp\util\SupplierInterface;
 
 /**
  * Interface GraphInterface
@@ -30,23 +31,23 @@ interface GraphInterface
     /**
      * Get an edge connecting the source vertext to the target vertex
      *
-     * @return array
+     * @return null|EdgeInterface
      */
     public function getEdge(VertexInterface $sourceVertex, VertexInterface $targetVertex): ?EdgeInterface;
     
     /**
      * Get the vertex supplier that the graph uses whenever it needs to create new vertices
      *
-     * @return mixed
+     * @return SupplierInterface
      */
-    public function getVertexSupplier();
+    public function getVertexSupplier(): SupplierInterface;
 
     /**
      * Get the edge supplier that the graph uses whenever it needs to create new edges
      *
-     * @return mixed
+     * @return SupplierInterface
      */
-    public function getEdgeSupplier();
+    public function getEdgeSupplier(): SupplierInterface;
     
     /**
      * Create a new edge in the graph. Return the newly created edge if added to the graph.
@@ -68,6 +69,10 @@ interface GraphInterface
     
     /**
      * Check if the graph contains the given edge, specified either by two vertices or by the edge itself
+     *
+     * @param VertexInterface $sourceVertex - the source vertex
+     * @param VertexInterface $targetVertex - the target vertex
+     * @param EdgeInterface $edge - the edge
      *
      * @return bool
      */
@@ -166,16 +171,16 @@ interface GraphInterface
     /**
      * Get the set of edges contained in the graph
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function edgeSet(): array;
+    public function edgeSet(): EdgeSet;
 
     /**
      * Get the set of vertices contained in the graph
      *
-     * @return array
+     * @return VertexSet
      */
-    public function vertexSet(): array;
+    public function vertexSet(): VertexSet;
     
     /**
      * Get the edge source vertex

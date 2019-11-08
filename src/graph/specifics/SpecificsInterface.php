@@ -4,6 +4,7 @@ namespace graphp\graph\specifics;
 
 use graphp\edge\EdgeInterface;
 use graphp\vertex\VertexInterface;
+use graphp\vertex\VertexSet;
 
 /**
  * Interface SpecificsInterface
@@ -22,9 +23,9 @@ interface SpecificsInterface
     /**
      * Get the vertex set
      *
-     * @return array
+     * @return VertexSet
      */
-    public function getVertexSet(): array;
+    public function getVertexSet(): VertexSet;
     
     /**
      * Get all edges connecting the source vertex to the target vertex
