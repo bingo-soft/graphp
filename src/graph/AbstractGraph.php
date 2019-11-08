@@ -436,7 +436,7 @@ class AbstractGraph implements GraphInterface
         if ($this->containsVertex($vertex)) {
             return true;
         } else {
-            throw new \InvalidArgumentException("no such vertex in graph");
+            throw new InvalidArgumentException("no such vertex in graph");
         }
     }
 }
