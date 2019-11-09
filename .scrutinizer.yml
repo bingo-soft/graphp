@@ -2,11 +2,11 @@ before_commands:
     - "composer install --no-interaction"
 build:
   nodes:
-    php70:
+    php71:
       environment:
         php: 7.1
         redis: false
-    php71:
+    php72:
       environment:
         php: 7.2
         redis: false
@@ -17,5 +17,3 @@ build:
             coverage:
               file: build/logs/clover.xml                                        
               format: clover
-checks:
-    php: true
