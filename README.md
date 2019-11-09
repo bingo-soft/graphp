@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/bingo-soft/graphp.png?branch=master)](https://travis-ci.org/bingo-soft/graphp)
-[![Coverage Status](https://coveralls.io/repos/github/bingo-soft/graphp/badge.svg)](https://coveralls.io/github/bingo-soft/graphp)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg)](https://php.net/)
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](http://www.gnu.org/licenses/lgpl-2.1)
 
 # Graphp
