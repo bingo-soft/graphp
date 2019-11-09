@@ -11,7 +11,7 @@
     }],
     "license": "LGPL-2.1-only",
     "require": {
-        "php": ">=7.1"
+        "php": "^7.1"
     },
     "require-dev": {
         "doctrine/coding-standard": "^6.0",
