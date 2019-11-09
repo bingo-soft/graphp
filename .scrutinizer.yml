@@ -4,10 +4,12 @@ build:
   nodes:
     php70:
       environment:
-        php: 7.0
+        php: 7.1
+        redis: false
     php71:
       environment:
-        php: 7.1
+        php: 7.2
+        redis: false
     coverage:
       tests:
         override:
