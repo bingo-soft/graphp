@@ -2,6 +2,12 @@ before_commands:
     - "composer install --no-interaction"
 build:
   nodes:
+    php70:
+      environment:
+        php: 7.0
+    php71:
+      environment:
+        php: 7.1
     coverage:
       tests:
         override:
@@ -9,3 +15,5 @@ build:
             coverage:
               file: build/logs/clover.xml                                        
               format: clover
+checks:
+    php: true
