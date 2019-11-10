@@ -28,4 +28,28 @@ class GraphBuilder
     {
         $this->graph = $graph;
     }
+
+    /**
+     * Add a vertex to the graph being built
+     *
+     * @param VertexInterface $vertex - the vertex
+     */
+    public function addVertex(VertexInterface $vertex): self
+    {
+        $this->graph->addVertex($vertex);
+        return $this;
+    }
+
+    /**
+     * Add vertices to the graph being built
+     *
+     * @param VertexInterface $vertex - the vertex
+     */
+    public function addVertices(array $vertices): self
+    {
+        foreach ($vertices as $vertex) {
+            $this->addVertex($vertex);
+        }
+        return $this;
+    }
 }
