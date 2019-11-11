@@ -7,10 +7,12 @@ use graphp\graph\specifics\SpecificsInterface;
 use graphp\graph\specifics\UndirectedSpecifics;
 use graphp\graph\specifics\DirectedSpecifics;
 use graphp\edge\EdgeInterface;
+use graphp\edge\EdgeSet;
 use graphp\edge\specifics\EdgeSpecificsInterface;
 use graphp\edge\specifics\UniformEdgeSpecifics;
 use graphp\edge\specifics\WeightedEdgeSpecifics;
 use graphp\vertex\VertexInterface;
+use graphp\vertex\VertexSet;
 use graphp\util\SupplierInterface;
 
 /**
@@ -63,9 +65,9 @@ class AbstractGraph implements GraphInterface
      * @param GraphTypeInterface $type - the graph type
      */
     protected function __construct(
-        SupplierInterface $vertexSupplier,
-        SupplierInterface $edgeSupplier,
-        GraphTypeInterface $type
+        ?SupplierInterface $vertexSupplier = null,
+        ?SupplierInterface $edgeSupplier = null,
+        ?GraphTypeInterface $type = null
     ) {
         $this->vertexSupplier = $vertexSupplier;
         $this->edgeSupplier = $edgeSupplier;
@@ -101,9 +103,9 @@ class AbstractGraph implements GraphInterface
     /**
      * Get all edges connecting the source vertext to the target vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): array
+    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): EdgeSet
     {
         return $this->specifics->getAllEdges($sourceVertex, $targetVertex);
     }
@@ -121,9 +123,9 @@ class AbstractGraph implements GraphInterface
     /**
      * Get the vertex supplier that the graph uses whenever it needs to create new vertices
      *
-     * @return SupplierInterface
+     * @return null|SupplierInterface
      */
-    public function getVertexSupplier(): SupplierInterface
+    public function getVertexSupplier(): ?SupplierInterface
     {
         return $this->vertexSupplier;
     }
@@ -139,6 +141,16 @@ class AbstractGraph implements GraphInterface
     }
 
     /**
+     * Get the graph type
+     *
+     * @return GraphTypeInterface
+     */
+    public function getType(): GraphTypeInterface
+    {
+        return $this->type;
+    }
+
+    /**
      * Create a new edge in the graph. Return the newly created edge if added to the graph.
      *
      * @return EdgeInterface
@@ -149,7 +161,7 @@ class AbstractGraph implements GraphInterface
         VertexInterface $sourceVertex,
         VertexInterface $targetVertex,
         ?EdgeInterface $edge = null
-    ): EdgeInterface {
+    ): ?EdgeInterface {
         $this->assertVertexExists($sourceVertex);
         $this->assertVertexExists($targetVertex);
         
@@ -174,15 +186,16 @@ class AbstractGraph implements GraphInterface
     /**
      * Create and return a new vertex in the graph.
      *
-     * @return VertexInterface
+     * @return null|VertexInterface
      */
-    public function addVertex(VertexInterface $vertex): VertexInterface
+    public function addVertex(VertexInterface $vertex): ?VertexInterface
     {
         if (!$this->containsVertex($vertex)) {
             $this->specifics->addVertex($vertex);
+            return $vertex;
         }
         
-        return $vertex;
+        return null;
     }
 
     /**
@@ -220,9 +233,9 @@ class AbstractGraph implements GraphInterface
      *
      * @param VertexInterface - the vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function edgesOf(VertexInterface $vertex): array
+    public function edgesOf(VertexInterface $vertex): EdgeSet
     {
         $this->assertVertexExists($vertex);
         return $this->specifics->edgesOf($vertex);
@@ -233,9 +246,9 @@ class AbstractGraph implements GraphInterface
      *
      * @param VertexInterface $vertex - the vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function incomingEdgesOf(VertexInterface $vertex): array
+    public function incomingEdgesOf(VertexInterface $vertex): EdgeSet
     {
         $this->assertVertexExists($vertex);
         return $this->specifics->incomingEdgesOf($vertex);
@@ -246,9 +259,9 @@ class AbstractGraph implements GraphInterface
      *
      * @param VertexInterface $vertex - the vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function outgoingEdgesOf(VertexInterface $vertex): array
+    public function outgoingEdgesOf(VertexInterface $vertex): EdgeSet
     {
         $this->assertVertexExists($vertex);
         return $this->specifics->outgoingEdgesOf($vertex);
@@ -404,9 +417,9 @@ class AbstractGraph implements GraphInterface
      *
      * @param EdgeInterface $edge - the edge
      *
-     * @return double
+     * @return float
      */
-    public function getEdgeWeight(EdgeInterface $edge): double
+    public function getEdgeWeight(EdgeInterface $edge): float
     {
         return $this->edgeSpecifics->getEdgeWeight($edge);
     }
@@ -415,9 +428,9 @@ class AbstractGraph implements GraphInterface
      * Set the edge weight
      *
      * @param EdgeInterface $edge - the edge
-     * @param double $weight - the edge weight
+     * @param float $weight - the edge weight
      */
-    public function setEdgeWeight(EdgeInterface $edge, double $weight): void
+    public function setEdgeWeight(EdgeInterface $edge, float $weight): void
     {
         $this->edgeSpecifics->setEdgeWeight($edge, $weight);
     }

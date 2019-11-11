@@ -4,7 +4,9 @@ namespace graphp\graph;
 
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSetFactoryInterface;
+use graphp\edge\EdgeSet;
 use graphp\vertex\VertexInterface;
+use graphp\vertex\VertexSet;
 use graphp\util\SupplierInterface;
 
 /**
@@ -17,16 +19,16 @@ interface GraphInterface
     /**
      * Default edge weight
      *
-     * @var double
+     * @var float
      */
     public const DEFAULT_EDGE_WEIGHT = 1.0;
 
     /**
      * Get all edges connecting the source vertext to the target vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): array;
+    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): EdgeSet;
     
     /**
      * Get an edge connecting the source vertext to the target vertex
@@ -38,9 +40,9 @@ interface GraphInterface
     /**
      * Get the vertex supplier that the graph uses whenever it needs to create new vertices
      *
-     * @return SupplierInterface
+     * @return null|SupplierInterface
      */
-    public function getVertexSupplier(): SupplierInterface;
+    public function getVertexSupplier(): ?SupplierInterface;
 
     /**
      * Get the edge supplier that the graph uses whenever it needs to create new edges
@@ -52,20 +54,20 @@ interface GraphInterface
     /**
      * Create a new edge in the graph. Return the newly created edge if added to the graph.
      *
-     * @return EdgeInterface
+     * @return null|EdgeInterface
      */
     public function addEdge(
         VertexInterface $sourceVertex,
         VertexInterface $targetVertex,
         ?EdgeInterface $edge = null
-    ): EdgeInterface;
+    ): ?EdgeInterface;
     
     /**
      * Create and return a new vertex in the graph.
      *
-     * @return VertexInterface
+     * @return null|VertexInterface
      */
-    public function addVertex(VertexInterface $vertex): VertexInterface;
+    public function addVertex(VertexInterface $vertex): ?VertexInterface;
     
     /**
      * Check if the graph contains the given edge, specified either by two vertices or by the edge itself
@@ -94,27 +96,27 @@ interface GraphInterface
      *
      * @param VertexInterface - the vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function edgesOf(VertexInterface $vertex): array;
+    public function edgesOf(VertexInterface $vertex): EdgeSet;
     
     /**
      * Get a set of all edges incoming into the specified vertex
      *
      * @param VertexInterface $vertex - the vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function incomingEdgesOf(VertexInterface $vertex): array;
+    public function incomingEdgesOf(VertexInterface $vertex): EdgeSet;
 
     /**
      * Get a set of all edges outgoing from the specified vertex
      *
      * @param VertexInterface $vertex - the vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function outgoingEdgesOf(VertexInterface $vertex): array;
+    public function outgoingEdgesOf(VertexInterface $vertex): EdgeSet;
     
     /**
      * Remove all edges specified by two vertices or the the list of edges themselves.
@@ -205,15 +207,15 @@ interface GraphInterface
      *
      * @param EdgeInterface $edge - the edge
      *
-     * @return double
+     * @return float
      */
-    public function getEdgeWeight(EdgeInterface $edge): double;
+    public function getEdgeWeight(EdgeInterface $edge): float;
     
     /**
      * Set the edge weight
      *
      * @param EdgeInterface $edge - the edge
-     * @param double $weight - the edge weight
+     * @param float $weight - the edge weight
      */
-    public function setEdgeWeight(EdgeInterface $edge, double $weight): void;
+    public function setEdgeWeight(EdgeInterface $edge, float $weight): void;
 }

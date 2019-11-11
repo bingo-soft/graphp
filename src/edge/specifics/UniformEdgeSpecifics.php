@@ -20,13 +20,14 @@ class UniformEdgeSpecifics implements EdgeSpecificsInterface
      *
      * @var array
      */
-    protected $edgeSet = [];
+    protected $edgeSet;
     
     /**
      * Construct a new specifics
      */
     public function __construct()
     {
+        $this->edgeSet = new EdgeSet();
     }
     
     /**
@@ -38,7 +39,7 @@ class UniformEdgeSpecifics implements EdgeSpecificsInterface
      */
     public function containsEdge(EdgeInterface $edge): bool
     {
-        return in_array($edge, $this->edgeSet);
+        return $this->edgeSet->contains($edge);
     }
     
      /**
@@ -58,8 +59,8 @@ class UniformEdgeSpecifics implements EdgeSpecificsInterface
      */
     public function remove(EdgeInterface $edge): void
     {
-        if (($id = array_search($edge, $this->edgeSet)) !== false) {
-            unset($this->edgeSet[$id]);
+        if ($this->edgeSet->contains($edge)) {
+            $this->edgeSet->remove($edge);
         }
     }
     
@@ -92,9 +93,9 @@ class UniformEdgeSpecifics implements EdgeSpecificsInterface
      *
      * @param EdgeInterface $edge - the edge
      *
-     * @return double
+     * @return float
      */
-    public function getEdgeWeight(EdgeInterface $edge): double
+    public function getEdgeWeight(EdgeInterface $edge): float
     {
         return GraphInterface::DEFAULT_EDGE_WEIGHT;
     }
@@ -103,11 +104,11 @@ class UniformEdgeSpecifics implements EdgeSpecificsInterface
      * Set the edge weight
      *
      * @param EdgeInterface $edge - the edge
-     * @param double $weight - the weight
+     * @param float $weight - the weight
      *
      * @throws BadMethodCallException
      */
-    public function setEdgeWeight(EdgeInterface $edge, double $weight): void
+    public function setEdgeWeight(EdgeInterface $edge, float $weight): void
     {
         throw new BadMethodCallException("Method is not supported by this type of edge");
     }
@@ -121,7 +122,7 @@ class UniformEdgeSpecifics implements EdgeSpecificsInterface
      */
     public function getEdge(EdgeInterface $edge): ?EdgeInterface
     {
-        if (($id = array_search($edge, $this->edgeSet)) !== false) {
+        if (($id = array_search($edge, $this->edgeSet->getArrayCopy())) !== false) {
             return $this->edgeSet[$id];
         }
         return null;

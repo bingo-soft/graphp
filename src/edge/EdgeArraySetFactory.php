@@ -16,8 +16,8 @@ class EdgeArraySetFactory implements EdgeSetFactoryInterface
      *
      * @param VertexInterface $sourceVertex - the vertex for which the edge set is being created
      */
-    public function createEdgeSet(VertexInterface $vertex): array
+    public function createEdgeSet(VertexInterface $vertex): EdgeSet
     {
-        return [];
+        return new EdgeSet();
     }
 }

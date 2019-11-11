@@ -11,7 +11,7 @@ Graphp is PHP library, which provides mathematical graph-theory objects and algo
 
 ## Acknowledgements
 
-Graphp draws inspiration from the [JGraphT](https://github.com/jgrapht/jgrapht) library. It tries to follow JGraphT architectural styles and port its major funcionality.
+Graphp draws inspiration from the [JGraphT](https://github.com/jgrapht/jgrapht) library.
 
 ## License
 

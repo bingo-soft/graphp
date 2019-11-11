@@ -5,6 +5,7 @@ namespace graphp\graph\specifics;
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSetFactoryInterface;
 use graphp\edge\EdgeContainerInterface;
+use graphp\edge\EdgeSet;
 use graphp\vertex\VertexInterface;
 
 /**
@@ -60,9 +61,9 @@ final class UndirectedEdgeContainer implements EdgeContainerInterface
     /**
      * Get all container edges
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function getEdges(): array
+    public function getEdges(): EdgeSet
     {
         return $this->vertexEdges;
     }

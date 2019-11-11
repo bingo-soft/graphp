@@ -17,9 +17,9 @@ class WeightedEdgeSpecifics extends UniformEdgeSpecifics
      *
      * @param EdgeInterface $edge - the edge
      *
-     * @return double
+     * @return float
      */
-    public function getEdgeWeight(EdgeInterface $edge): double
+    public function getEdgeWeight(EdgeInterface $edge): float
     {
         return $edge->getWeight();
     }
@@ -28,9 +28,9 @@ class WeightedEdgeSpecifics extends UniformEdgeSpecifics
      * Set the edge weight
      *
      * @param EdgeInterface $edge - the edge
-     * @param double $weight - the weight
+     * @param float $weight - the weight
      */
-    public function setEdgeWeight(EdgeInterface $edge, double $weight): void
+    public function setEdgeWeight(EdgeInterface $edge, float $weight): void
     {
         $edge->setWeight($weight);
     }

@@ -3,6 +3,7 @@
 namespace graphp\graph\specifics;
 
 use graphp\edge\EdgeInterface;
+use graphp\edge\EdgeSet;
 use graphp\vertex\VertexInterface;
 use graphp\vertex\VertexSet;
 
@@ -33,9 +34,9 @@ interface SpecificsInterface
      * @param VertexInterface $sourceVertex - source vertex
      * @param VertexInterface $targetVertex - target vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): array;
+    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): EdgeSet;
     
     /**
      * Get an edge connecting the source vertex to the target vertex
@@ -52,9 +53,9 @@ interface SpecificsInterface
      *
      * @param VertexInterface $vertex - the vertex for which a set of touching edges is to be returned
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function edgesOf(VertexInterface $vertex): array;
+    public function edgesOf(VertexInterface $vertex): EdgeSet;
     
     /**
      * Add the specified edge to the edge containers of its source and target vertices.
@@ -75,18 +76,18 @@ interface SpecificsInterface
      *
      * @param VertexInterface $vertex - the vertex for which the list of outgoing edges to be returned
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function outgoingEdgesOf(VertexInterface $vertex): array;
+    public function outgoingEdgesOf(VertexInterface $vertex): EdgeSet;
 
     /**
      * Get all edges incoming into the specified vertex
      *
      * @param VertexInterface $vertex - the vertex for which the list of incoming edges to be returned
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function incomingEdgesOf(VertexInterface $vertex): array;
+    public function incomingEdgesOf(VertexInterface $vertex): EdgeSet;
 
     /**
      * Get the degree of the specified vertex

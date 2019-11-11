@@ -6,6 +6,7 @@ use graphp\graph\GraphInterface;
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSetFactoryInterface;
 use graphp\edge\EdgeArraySetFactory;
+use graphp\edge\EdgeSet;
 use graphp\vertex\VertexInterface;
 use graphp\vertex\VertexMap;
 use graphp\vertex\VertexSet;
@@ -77,11 +78,11 @@ class DirectedSpecifics implements SpecificsInterface
      * @param VertexInterface $sourceVertex - source vertex
      * @param VertexInterface $targetVertex - target vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): array
+    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): EdgeSet
     {
-        $edges = [];
+        $edges = new EdgeSet();
         
         if (
             $this->graph->containsVertex($sourceVertex)
@@ -92,7 +93,7 @@ class DirectedSpecifics implements SpecificsInterface
             foreach ($allEdges as $edge) {
                 $equals = $this->graph->getEdgeTarget($edge)->equals($targetVertex);
                 
-                if ($equals && !in_array($edge, $edges)) {
+                if ($equals && !$edges->contains($edge)) {
                     $edges[] = $edge;
                 }
             }
@@ -134,16 +135,16 @@ class DirectedSpecifics implements SpecificsInterface
      *
      * @param VertexInterface $vertex - the vertex for which a set of touching edges is to be returned
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function edgesOf(VertexInterface $vertex): array
+    public function edgesOf(VertexInterface $vertex): EdgeSet
     {
-        $edges = $this->getEdgeContainer($vertex)->getOutgoing();
-        $edges = array_merge($edges, $this->getEdgeContainer($vertex)->getIncoming());
+        $edges = $this->getEdgeContainer($vertex)->getOutgoing()->getArrayCopy();
+        $edges = new EdgeSet(array_merge($edges, $this->getEdgeContainer($vertex)->getIncoming()->getArrayCopy()));
         
         //remove only one copy of self-loop
         if ($this->graph->getType()->isAllowingSelfLoops()) {
-            $loops = array_unique($this->getAllEdges($vertex, $vertex));
+            $loops = array_unique($this->getAllEdges($vertex, $vertex)->getArrayCopy());
             
             foreach ($edges as $key => $edge) {
                 if (($id = array_search($edge, $loops)) !== false) {
@@ -189,9 +190,9 @@ class DirectedSpecifics implements SpecificsInterface
      *
      * @param VertexInterface $vertex - the vertex for which the list of outgoing edges to be returned
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function outgoingEdgesOf(VertexInterface $vertex): array
+    public function outgoingEdgesOf(VertexInterface $vertex): EdgeSet
     {
         return $this->getEdgeContainer($vertex)->getOutgoing();
     }
@@ -201,9 +202,9 @@ class DirectedSpecifics implements SpecificsInterface
      *
      * @param VertexInterface $vertex - the vertex for which the list of incoming edges to be returned
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function incomingEdgesOf(VertexInterface $vertex): array
+    public function incomingEdgesOf(VertexInterface $vertex): EdgeSet
     {
         return $this->getEdgeContainer($vertex)->getIncoming();
     }

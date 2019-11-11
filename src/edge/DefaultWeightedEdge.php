@@ -15,7 +15,7 @@ class DefaultWeightedEdge extends DefaultEdge
     /**
      * Weight of the edge
      *
-     * @var double
+     * @var float
      */
     protected $weight = GraphInterface::DEFAULT_EDGE_WEIGHT;
 
@@ -24,8 +24,18 @@ class DefaultWeightedEdge extends DefaultEdge
      *
      * @return mixed
      */
-    protected function getWeight(): double
+    public function getWeight(): float
     {
         return $this->weight;
+    }
+
+    /**
+     * Set the weight of the edge
+     *
+     * @param float $weight - the edge weight
+     */
+    public function setWeight(float $weight): void
+    {
+        $this->weight = $weight;
     }
 }

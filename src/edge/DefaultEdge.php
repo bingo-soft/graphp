@@ -65,7 +65,7 @@ class DefaultEdge implements EdgeInterface
      *
      * @return VertexInterface
      */
-    protected function getSource(): VertexInterface
+    public function getSource(): VertexInterface
     {
         return $this->sourceVertex;
     }
@@ -75,9 +75,29 @@ class DefaultEdge implements EdgeInterface
      *
      * @return VertexInterface
      */
-    protected function getTarget(): VertexInterface
+    public function getTarget(): VertexInterface
     {
         return $this->targetVertex;
+    }
+
+    /**
+     * Set the edge source vertex
+     *
+     * @param VertexInterface $vertex - the source vertex
+     */
+    public function setSource(VertexInterface $vertex): void
+    {
+        $this->sourceVertex = $vertex;
+    }
+    
+    /**
+     * Set the edge target vertex
+     *
+     * @param VertexInterface $vertex - the target vertex
+     */
+    public function setTarget(VertexInterface $vertex): void
+    {
+        $this->targetVertex = $vertex;
     }
 
     /**

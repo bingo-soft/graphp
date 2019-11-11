@@ -16,5 +16,5 @@ interface EdgeSetFactoryInterface
      *
      * @param VertexInterface $sourceVertex - the vertex for which the edge set is being created
      */
-    public function createEdgeSet(VertexInterface $sourceVertex): array;
+    public function createEdgeSet(VertexInterface $sourceVertex): EdgeSet;
 }

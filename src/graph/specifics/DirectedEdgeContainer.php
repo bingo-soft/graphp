@@ -5,6 +5,7 @@ namespace graphp\graph\specifics;
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeContainerInterface;
 use graphp\edge\EdgeSetFactoryInterface;
+use graphp\edge\EdgeSet;
 use graphp\vertex\VertexInterface;
 
 /**
@@ -19,14 +20,14 @@ class DirectedEdgeContainer implements EdgeContainerInterface
      *
      * @var array
      */
-    private $outgoing = [];
+    private $outgoing;
     
     /**
      * Incoming vertex edges
      *
      * @var array
      */
-    private $incoming = [];
+    private $incoming;
     
     /**
      * Construct directed edge container
@@ -43,9 +44,9 @@ class DirectedEdgeContainer implements EdgeContainerInterface
     /**
      * Get container outgoing edges
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function getOutgoing(): array
+    public function getOutgoing(): EdgeSet
     {
         return $this->outgoing;
     }
@@ -53,9 +54,9 @@ class DirectedEdgeContainer implements EdgeContainerInterface
     /**
      * Get container incoming edges
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function getIncoming(): array
+    public function getIncoming(): EdgeSet
     {
         return $this->incoming;
     }
@@ -108,5 +109,15 @@ class DirectedEdgeContainer implements EdgeContainerInterface
                 break;
             }
         }
+    }
+
+    /**
+     * Get the number of edges
+     *
+     * @return int
+     */
+    public function edgeCount(): int
+    {
+        return count($this->outgoing) + count($this->incoming);
     }
 }
