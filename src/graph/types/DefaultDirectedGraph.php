@@ -1,6 +1,6 @@
 <?php
 
-namespace graphp\graph\graphs;
+namespace graphp\graph\types;
 
 use graphp\graph\AbstractGraph;
 use graphp\graph\GraphTypeBuilder;
@@ -9,7 +9,7 @@ use graphp\util\SupplierUtil;
 /**
  * Class DefaultDirectedGraph
  *
- * @package graphp\graph\graphs
+ * @package graphp\graph\types
  */
 class DefaultDirectedGraph extends AbstractGraph
 {

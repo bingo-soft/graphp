@@ -124,14 +124,14 @@ interface GraphInterface
      *
      * @param VertexInterface $vertex - the source vertex
      * @param VertexInterface $vertex - the target vertex
-     * @param array $edges - the edges
+     * @param EdgeSet $edges - the edges
      *
      * @return bool
      */
     public function removeAllEdges(
         ?VertexInterface $sourceVertex = null,
         ?VertexInterface $targetVertex = null,
-        array $edges = []
+        EdgeSet $edges
     ): bool;
     
     /**

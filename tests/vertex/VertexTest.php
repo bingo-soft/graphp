@@ -20,7 +20,7 @@ class VertexTest extends TestCase
         $this->assertEquals(1, (string) $vertex1);
     }
 
-    public function testVertexmapCreation(): void
+    public function testVertexMapMethods(): void
     {
         $vm = new VertexMap();
         $vertex = new Vertex(123);
@@ -34,9 +34,18 @@ class VertexTest extends TestCase
         $vertices = $vm->keySet();
         $this->assertCount(1, $vertices);
         $this->assertInstanceOf(Vertex::class, $vertices[0]);
+
+        $vm->remove($vertex);
+        $this->assertNull($vm->get($vertex));
+
+        $vm->put($vertex, $ec);
+        $this->assertNotNull($vm->get($vertex));
+        $id = $vertex->getHash();
+        unset($vm[$id]);
+        $this->assertNull($vm->get($vertex));
     }
 
-    public function testVertexsetCreation(): void
+    public function testVertexSetCreation(): void
     {
         $vs = new VertexSet();
         $vertex1 = new Vertex(1);

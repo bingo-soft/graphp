@@ -18,7 +18,7 @@ class UniformEdgeSpecifics implements EdgeSpecificsInterface
     /**
      * The edge set
      *
-     * @var array
+     * @var EdgeSet
      */
     protected $edgeSet;
     

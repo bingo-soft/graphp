@@ -273,14 +273,14 @@ class AbstractGraph implements GraphInterface
      *
      * @param VertexInterface $vertex - the source vertex
      * @param VertexInterface $vertex - the target vertex
-     * @param array $edges - the edges
+     * @param EdgeSet $edges - the edges
      *
      * @return bool
      */
     public function removeAllEdges(
         ?VertexInterface $sourceVertex = null,
         ?VertexInterface $targetVertex = null,
-        array $edges = []
+        EdgeSet $edges
     ): bool {
         $changed = false;
         if (!is_null($sourceVertex) && !is_null($targetVertex)) {
@@ -292,7 +292,7 @@ class AbstractGraph implements GraphInterface
             }
         } else {
             foreach ($edges as $edge) {
-                if ($this->containsEdge($edge)) {
+                if ($this->containsEdge(null, null, $edge)) {
                     $this->specifics->removeEdgeFromTouchingVertices($edge);
                     $this->edgeSpecifics->remove($edge);
                     $changed = true;

@@ -20,6 +20,13 @@ interface SpecificsInterface
      * @param VertexInterface $vertex - vertex to be added
      */
     public function addVertex(VertexInterface $vertex): void;
+
+    /**
+     * Remove a vertex
+     *
+     * @param VertexInterface $vertex - vertex to be removed
+     */
+    public function removeVertex(VertexInterface $vertex): void;
     
     /**
      * Get the vertex set

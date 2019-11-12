@@ -4,7 +4,9 @@ namespace graphp\graph;
 
 use InvalidArgumentException;
 use graphp\edge\EdgeInterface;
+use graphp\edge\EdgeSet;
 use graphp\vertex\VertexInterface;
+use graphp\vertex\VertexSet;
 
 /**
  * Class GraphUtils
@@ -14,10 +16,41 @@ use graphp\vertex\VertexInterface;
 class GraphUtils
 {
     /**
+     * Create a new edge and add it to the specified graph
+     *
+     * @param GraphInterface $graph - the graph
+     * @param VertexInterface $sourceVertex - the source vertex
+     * @param VertexInterface $targetVertex - the target vertex
+     * @param float $weight - the weight of the edge being added
+     *
+     * @return EdgeInterface
+     */
+    public static function addEdge(
+        GraphInterface $graph,
+        VertexInterface $sourceVertex,
+        VertexInterface $targetVertex,
+        ?float $weight = null
+    ): ?EdgeInterface {
+        $edgeSupplier = $graph->getEdgeSupplier();
+        if (is_null($edgeSupplier)) {
+            throw new Exception("Graph contains no edge supplier");
+        }
+        $edge = $edgeSupplier->get();
+
+        if ($graph->addEdge($sourceVertex, $targetVertex, $edge)) {
+            if ($graph->getType()->isWeighted()) {
+                $graph->setEdgeWeight($edge, $weight);
+            }
+            return $edge;
+        }
+        return null;
+    }
+
+    /**
      * Add the speficied source and target vertices to the graph
      *
      * @param GraphInterface $graph - the graph
-     * @param VertexInterface $vertex - the source vertex
+     * @param VertexInterface $sourceVertex - the source vertex
      * @param VertexInterface $targetVertex - the target vertex
      * @param float $weight - the weight of the edge being added
      *
@@ -31,7 +64,7 @@ class GraphUtils
     ): EdgeInterface {
         $graph->addVertex($sourceVertex);
         $graph->addVertex($targetVertex);
-        return $graph->addEdge($sourceVertex, $targetVertex, $weight);
+        return self::addEdge($graph, $sourceVertex, $targetVertex, $weight);
     }
 
     /**
@@ -46,7 +79,7 @@ class GraphUtils
     public static function addGraph(GraphInterface $targetGraph, GraphInterface $sourceGraph): bool
     {
         $modified = self::addAllVertices($targetGraph, $sourceGraph->vertexSet());
-        $modified = $modified || self::addAllEdges($targetGraph, $sourceGraph, $sourceGraph->edgeSet());
+        return self::addAllEdges($targetGraph, $sourceGraph, $sourceGraph->edgeSet()) || $modified;
     }
 
     /**
@@ -54,15 +87,15 @@ class GraphUtils
      * Return true, if the graph was modified
      *
      * @param GraphInterface $graph - the target graph
-     * @param array $vertices - the vertices
+     * @param VertexSet $vertices - the vertices
      *
      * @return bool
      */
-    public static function addAllVertices(GraphInterface $graph, array $vertices = []): bool
+    public static function addAllVertices(GraphInterface $graph, VertexSet $vertices): bool
     {
         $modified = false;
         foreach ($vertices as $vertex) {
-            $modified = $modified || $graph->addVertex($vertex);
+            $modified = $graph->addVertex($vertex) || $modified;
         }
         return $modified;
     }
@@ -73,14 +106,14 @@ class GraphUtils
      *
      * @param GraphInterface $targetGraph - the target graph
      * @param GraphInterface $sourceGraph - the source graph
-     * @param array $edges - the edges to add
+     * @param EdgeSet $edges - the edges to add
      *
      * @return bool
      */
     public static function addAllEdges(
         GraphInterface $targetGraph,
         GraphInterface $sourceGraph,
-        array $edges = []
+        EdgeSet $edges
     ): bool {
         $modified = false;
         foreach ($edges as $edge) {
@@ -88,7 +121,7 @@ class GraphUtils
             $targetVertex = $sourceGraph->getEdgeTarget($edge);
             $targetGraph->addVertex($sourceVertex);
             $targetGraph->addVertex($targetVertex);
-            $modified = $modified || $targetGraph->addEdge($sourceVertex, $targetVertex, $edge);
+            $modified = $targetGraph->addEdge($sourceVertex, $targetVertex, $edge) || $modified;
         }
         return $modified;
     }
@@ -235,10 +268,10 @@ class GraphUtils
         foreach ($vertices as $vertex) {
             if (self::vertexHasPredecessors($graph, $vertex)) {
                 $predecessors = self::predecessorsOf($graph, $vertex);
-                $successors = self::successorListOf($graph, $vertex);
+                $successors = self::successorsOf($graph, $vertex);
 
                 foreach ($predecessors as $predecessor) {
-                    self::addOutgoingEdges($graph, $predecessor, $successors);
+                    self::addOutgoingEdges($graph, $predecessor, ...$successors);
                 }
             }
             $graph->removeVertex($vertex);

@@ -52,13 +52,24 @@ class VertexMap extends ArrayObject
     }
 
     /**
+     * Remove a vertex from the vertexmap
+     *
+     * @param VertexInterface $vertex - niddle
+     */
+    public function remove(VertexInterface $vertex): void
+    {
+        $this->offsetUnset($vertex->getHash());
+    }
+
+    /**
      * Unset VertexMap value by key
      *
      * @param mixed $offset - array offset
      */
     public function offsetUnset($offset): void
     {
-        parent::offsetSet($offset);
+        $iter = $this->getIterator();
+        $iter->offsetUnset($offset);
         unset($this->vertices[$offset]);
     }
 

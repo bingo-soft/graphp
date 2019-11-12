@@ -63,6 +63,16 @@ class DirectedSpecifics implements SpecificsInterface
     }
 
     /**
+     * Remove a vertex
+     *
+     * @param VertexInterface $vertex - vertex to be removed
+     */
+    public function removeVertex(VertexInterface $vertex): void
+    {
+        $this->vertexMap->remove($vertex);
+    }
+
+    /**
      * Get the vertex set
      *
      * @return VertexSet

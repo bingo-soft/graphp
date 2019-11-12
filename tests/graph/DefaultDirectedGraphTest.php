@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use graphp\graph\DefaultGraphType;
 use graphp\graph\specifics\DirectedSpecifics;
 use graphp\graph\specifics\UndirectedSpecifics;
-use graphp\graph\graphs\DefaultDirectedGraph;
+use graphp\graph\types\DefaultDirectedGraph;
 use graphp\edge\DefaultEdge;
 use graphp\edge\DefaultWeightedEdge;
 use graphp\vertex\Vertex;
