@@ -1,7 +1,7 @@
 [![Latest Stable Version](https://poser.pugx.org/bingo-soft/graphp/v/stable.png)](https://packagist.org/packages/bingo-soft/graphp)
 [![Build Status](https://travis-ci.org/bingo-soft/graphp.png?branch=master)](https://travis-ci.org/bingo-soft/graphp)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg)](https://php.net/)
-[![License: MIT](https://poser.pugx.org/bingo-soft/graphp/license.svg?)](https://packagist.org/packages/bingo-soft/graphp?)
+[![License: MIT](https://poser.pugx.org/bingo-soft/graphp/license.svg?id=1)](https://packagist.org/packages/bingo-soft/graphp?id=1)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bingo-soft/graphp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bingo-soft/graphp/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/bingo-soft/graphp/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bingo-soft/graphp/?branch=master)
 
