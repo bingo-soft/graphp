@@ -162,7 +162,7 @@ class GraphUtilsTest extends TestCase
         GraphUtils::removeVertexAndPreserveConnectivity($graph, $v2, $v3);
         $edges = $graph->edgeSet();
         $this->assertCount(1, $edges);
-        $edge = $edges[array_key_first($edges->getArrayCopy())];
+        $edge = $edges[array_keys($edges->getArrayCopy())[0]];
         $this->assertTrue($v1->equals($edge->getSource()));
         $this->assertTrue($v4->equals($edge->getTarget()));
     }
