@@ -7,18 +7,33 @@ use graphp\graph\DefaultGraphType;
 use graphp\graph\specifics\DirectedSpecifics;
 use graphp\graph\specifics\UndirectedSpecifics;
 use graphp\graph\types\DefaultDirectedGraph;
+use graphp\graph\GraphUtils;
 use graphp\edge\DefaultEdge;
 use graphp\edge\DefaultWeightedEdge;
+use graphp\edge\specifics\UniformEdgeSpecifics;
+use graphp\edge\specifics\WeightedEdgeSpecifics;
 use graphp\vertex\Vertex;
 use graphp\util\Supplier;
 
 class DefaultDirectedGraphTest extends TestCase
 {
-    public function testDefaultDirectedGraphCreation(): void
+    public function testDefaultDirectedGraphMethods(): void
     {
         $graph = new DefaultDirectedGraph(DefaultEdge::class);
         $this->assertNotNull($graph);
         $this->assertTrue($graph instanceof DefaultDirectedGraph);
+
+        $spec = $graph->createSpecifics(true);
+        $this->assertTrue($spec instanceof DirectedSpecifics);
+
+        $spec = $graph->createEdgeSpecifics(true);
+        $this->assertTrue($spec instanceof WeightedEdgeSpecifics);
+
+        $spec = $graph->createEdgeSpecifics(false);
+        $this->assertTrue($spec instanceof UniformEdgeSpecifics);
+
+        $this->assertNull($graph->getVertexSupplier());
+        $this->assertTrue($graph->getType() instanceof DefaultGraphType);
     }
 
     public function testVertexMethods(): void
@@ -35,6 +50,15 @@ class DefaultDirectedGraphTest extends TestCase
         $this->assertTrue($graph->containsVertex($v1));
         $this->assertTrue($graph->containsVertex($v2));
         $this->assertFalse($graph->containsVertex($v3));
+
+        $graph->removeAllVertices($graph->vertexSet());
+        $this->assertCount(0, $graph->vertexSet());
+
+        $v11 = $graph->addVertex($v1);
+        $this->assertCount(1, $graph->vertexSet());
+        $this->assertTrue($graph->removeVertex($v1));
+        $this->assertFalse($graph->removeVertex($v1));
+        $this->assertCount(0, $graph->vertexSet());
     }
 
     public function testEdgeMethods(): void
@@ -53,9 +77,7 @@ class DefaultDirectedGraphTest extends TestCase
 
         $this->assertNotNull($graph->getEdge($v1, $v2));
         $this->assertNull($graph->getEdge($v2, $v1));
-
-        $this->assertTrue($graph->getType() instanceof DefaultGraphType);
-
+        
         $this->assertTrue($graph->containsEdge($v1, $v2));
         $this->assertTrue($graph->containsEdge(null, null, $edge));
 
@@ -81,5 +103,18 @@ class DefaultDirectedGraphTest extends TestCase
         $this->assertTrue($v1->equals($graph->getEdgeSource($edge)));
         $this->assertFalse($v2->equals($graph->getEdgeSource($edge)));
         $this->assertTrue($v2->equals($graph->getEdgeTarget($edge)));
+
+        $graph->removeAllEdges($v1, $v2);
+        $this->assertCount(0, $graph->edgeSet());
+
+        $edge = $graph->addEdge($v1, $v2);
+        $this->assertNotNull($graph->getEdge($v1, $v2));
+        $graph->removeEdge($v1, $v2);
+        $this->assertNull($graph->getEdge($v1, $v2));
+
+        $edge = $graph->addEdge($v1, $v2);
+        $this->assertNotNull($graph->getEdge($v1, $v2));
+        $graph->removeEdge(null, null, $edge);
+        $this->assertNull($graph->getEdge($v1, $v2));
     }
 }

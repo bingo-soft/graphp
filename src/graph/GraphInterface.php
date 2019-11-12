@@ -138,11 +138,11 @@ interface GraphInterface
      * Remove all specified vertices contained in the graph.
      * Return true, if graph was changed
      *
-     * @param array $vertices - the vertices
+     * @param VertexSet $vertices - the vertices
      *
      * @return bool
      */
-    public function removeAllVertices(array $vertices = []): bool;
+    public function removeAllVertices(VertexSet $vertices): bool;
     
     /**
      * Remove the specifeid edge from the graph.

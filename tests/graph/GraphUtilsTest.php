@@ -166,7 +166,7 @@ class GraphUtilsTest extends TestCase
         $this->assertTrue($v1->equals($edge->getSource()));
         $this->assertTrue($v4->equals($edge->getTarget()));
     }
-
+      
     public function testAddOutgoingEdges(): void
     {
         $graph = new DefaultDirectedGraph(DefaultEdge::class);
@@ -181,5 +181,22 @@ class GraphUtilsTest extends TestCase
         GraphUtils::addOutgoingEdges($graph, $v2, $v3, $v4);
         $this->assertCount(3, $graph->edgeSet());
         $this->assertCount(3, GraphUtils::neighborsOf($graph, $v2));
+    }
+
+    public function testAddIncomingEdges(): void
+    {
+        $graph = new DefaultDirectedGraph(DefaultEdge::class);
+        $v1 = new Vertex(1);
+        $v2 = new Vertex(2);
+        $v3 = new Vertex(3);
+        $v4 = new Vertex(4);
+        $v5 = new Vertex(5);
+
+        $graph->addVertex($v1);
+        $graph->addVertex($v2);
+        $graph->addEdge($v1, $v2);
+        GraphUtils::addIncomingEdges($graph, $v2, $v3, $v4, $v5);
+        $this->assertCount(4, $graph->edgeSet());
+        $this->assertCount(4, GraphUtils::neighborsOf($graph, $v2));
     }
 }

@@ -280,7 +280,7 @@ class AbstractGraph implements GraphInterface
     public function removeAllEdges(
         ?VertexInterface $sourceVertex = null,
         ?VertexInterface $targetVertex = null,
-        EdgeSet $edges
+        ?EdgeSet $edges = null
     ): bool {
         $changed = false;
         if (!is_null($sourceVertex) && !is_null($targetVertex)) {
@@ -306,11 +306,11 @@ class AbstractGraph implements GraphInterface
      * Remove all specified vertices contained in the graph.
      * Return true, if graph was changed
      *
-     * @param array $vertices - the vertices
+     * @param VertexSet $vertices - the vertices
      *
      * @return bool
      */
-    public function removeAllVertices(array $vertices = []): bool
+    public function removeAllVertices(VertexSet $vertices): bool
     {
         $changed = false;
         foreach ($vertices as $vertex) {

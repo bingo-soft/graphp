@@ -6,6 +6,7 @@ use graphp\graph\GraphInterface;
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSetFactoryInterface;
 use graphp\edge\EdgeArraySetFactory;
+use graphp\edge\EdgeSet;
 use graphp\vertex\VertexInterface;
 use graphp\vertex\VertexMap;
 use graphp\vertex\VertexSet;
@@ -87,11 +88,11 @@ class UndirectedSpecifics implements SpecificsInterface
      * @param VertexInterface $sourceVertex - source vertex
      * @param VertexInterface $targetVertex - target vertex
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): array
+    public function getAllEdges(VertexInterface $sourceVertex, VertexInterface $targetVertex): EdgeSet
     {
-        $edges = [];
+        $edges = new EdgeSet();
         
         if (
             $this->graph->containsVertex($sourceVertex)
@@ -144,9 +145,9 @@ class UndirectedSpecifics implements SpecificsInterface
      *
      * @param VertexInterface $vertex - the vertex for which a set of touching edges is to be returned
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function edgesOf(VertexInterface $vertex): array
+    public function edgesOf(VertexInterface $vertex): EdgeSet
     {
         return $this->getEdgeContainer($vertex)->getEdges();
     }
@@ -190,9 +191,9 @@ class UndirectedSpecifics implements SpecificsInterface
      *
      * @param VertexInterface $vertex - the vertex for which the list of outgoing edges to be returned
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function outgoingEdgesOf(VertexInterface $vertex): array
+    public function outgoingEdgesOf(VertexInterface $vertex): EdgeSet
     {
         return $this->getEdgeContainer($vertex)->getEdges();
     }
@@ -202,9 +203,9 @@ class UndirectedSpecifics implements SpecificsInterface
      *
      * @param VertexInterface $vertex - the vertex for which the list of incoming edges to be returned
      *
-     * @return array
+     * @return EdgeSet
      */
-    public function incomingEdgesOf(VertexInterface $vertex): array
+    public function incomingEdgesOf(VertexInterface $vertex): EdgeSet
     {
         return $this->getEdgeContainer($vertex)->getEdges();
     }
@@ -224,7 +225,7 @@ class UndirectedSpecifics implements SpecificsInterface
 
             foreach ($edges as $edge) {
                 //if it is a loop, then count twice
-                if ($graph->getEdgeSource($edge)->equals($this->graph->getEdgeTarget($edge))) {
+                if ($this->graph->getEdgeSource($edge)->equals($this->graph->getEdgeTarget($edge))) {
                     $degree += 2;
                 } else {
                     $degree += 1;

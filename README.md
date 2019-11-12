@@ -7,7 +7,7 @@
 
 # Graphp
 
-Graphp is PHP library, which provides mathematical graph-theory objects and algorithms. 
+Graphp is a PHP library, which provides mathematical graph-theory objects and algorithms. 
 
 ## Acknowledgements
 
