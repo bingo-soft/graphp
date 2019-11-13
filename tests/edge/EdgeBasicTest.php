@@ -3,6 +3,7 @@
 namespace tests\edge;
 
 use PHPUnit\Framework\TestCase;
+use BadMethodCallException;
 use graphp\edge\DefaultEdge;
 use graphp\edge\DefaultWeightedEdge;
 use graphp\edge\EdgeArraySetFactory;
@@ -46,18 +47,27 @@ class EdgeBasicTest extends TestCase
     {
         $es = new UniformEdgeSpecifics();
         $edge = new DefaultEdge();
+        $edge2 = new DefaultEdge();
         $this->assertFalse($es->containsEdge($edge));
 
         $v1 = new Vertex(1);
         $v2 = new Vertex(2);
         $es->add($edge, $v1, $v2);
+        $this->assertFalse($es->add($edge, $v1, $v2));
         $this->assertTrue($es->containsEdge($edge));
+        $this->assertNotNull($es->getEdge($edge));
+        $this->assertNull($es->getEdge($edge2));
         $this->assertTrue($edge->equals($es->getEdge($edge)));
-
+        $this->assertEquals(1, $es->getEdgeWeight($edge));
+       
         $this->assertCount(1, $es->getEdgeSet());
 
+        $this->assertNotNull($es->getEdgeSource($edge));
+        $this->assertNotNull($es->getEdgeTarget($edge));
         $this->assertTrue($v1->equals($es->getEdgeSource($edge)));
         $this->assertTrue($v2->equals($es->getEdgeTarget($edge)));
+        $this->expectException(BadMethodCallException::class);
+        $es->setEdgeWeight($edge, 10.0);
         
         $es->remove($edge);
         $this->assertCount(0, $es->getEdgeSet());
@@ -78,5 +88,19 @@ class EdgeBasicTest extends TestCase
         $ef = new EdgeArraySetFactory();
         $es = $ef->createEdgeSet($v);
         $this->assertTrue($es instanceof EdgeSet);
+    }
+
+    public function testEdgePrint(): void
+    {
+        $es = new UniformEdgeSpecifics();
+        $edge = new DefaultEdge();
+        $this->assertFalse($es->containsEdge($edge));
+
+        $v1 = new Vertex(1);
+        $v2 = new Vertex(2);
+        $es->add($edge, $v1, $v2);
+
+        $this->assertEquals("(1 : 2)", $edge->__toString());
+        $this->assertEquals("(1 : 2)", (string) $edge);
     }
 }

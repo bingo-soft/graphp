@@ -4,6 +4,7 @@ namespace graphp\graph;
 
 use graphp\edge\EdgeInterface;
 use graphp\vertex\VertexInterface;
+use graphp\vertex\VertexSet;
 
 /**
  * Class GraphBuilder
@@ -45,11 +46,11 @@ class GraphBuilder
     /**
      * Add vertices to the graph being built
      *
-     * @param VertexInterface $vertex - the vertex
+     * @param VertexSet $vertices - the vertices
      *
      * @return self
      */
-    public function addVertices(array $vertices): self
+    public function addVertices(VertexSet $vertices): self
     {
         foreach ($vertices as $vertex) {
             $this->addVertex($vertex);
@@ -105,11 +106,11 @@ class GraphBuilder
     /**
      * Add all the vertices and all the edges of the specified graph to the graph being built
      *
-     * @param GraphInterface $sourceGrap - the graph
+     * @param GraphInterface $sourceGraph - the graph
      *
      * @return self
      */
-    public function addGraph(GraphInterface $targetGraphp): self
+    public function addGraph(GraphInterface $sourceGraph): self
     {
         GraphUtils::addGraph($this->graph, $sourceGraph);
         return $this;
@@ -131,11 +132,11 @@ class GraphBuilder
     /**
      * Remove vertices from the graph being built
      *
-     * @param array $vertices - the vertices to remove
+     * @param VertexSet $vertices - the vertices to remove
      *
      * @return self
      */
-    public function removeVertices(array $vertices): self
+    public function removeVertices(VertexSet $vertices): self
     {
         foreach ($vertices as $vertex) {
             $this->removeVertex($vertex);

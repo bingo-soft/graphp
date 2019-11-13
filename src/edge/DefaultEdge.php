@@ -107,6 +107,6 @@ class DefaultEdge implements EdgeInterface
      */
     public function __toString(): string
     {
-        return "(" . $this->sourceVertex + " : " + $this->targetVertex + ")";
+        return "(" . (string) $this->sourceVertex . " : " . (string) $this->targetVertex . ")";
     }
 }

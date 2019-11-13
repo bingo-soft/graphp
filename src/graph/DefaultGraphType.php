@@ -270,7 +270,7 @@ class DefaultGraphType implements GraphTypeInterface
         $builder = new GraphTypeBuilder();
         return $builder->directed()
             ->allowSelfLoops(false)
-            ->allowMultipleEdges(true)
+            ->allowMultipleEdges(false)
             ->weighted(false)
             ->build();
     }
