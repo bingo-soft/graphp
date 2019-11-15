@@ -9,7 +9,7 @@
         "name": "Bingo-Soft",
         "email": "bingosoft@bk.ru"
     }],
-    "license": "LGPL-2.1-only",
+    "license": "MIT",
     "require": {
         "php": "^7.1"
     },
