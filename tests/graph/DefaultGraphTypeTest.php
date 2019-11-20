@@ -4,7 +4,7 @@ namespace tests\edge;
 
 use PHPUnit\Framework\TestCase;
 use graphp\graph\DefaultGraphType;
-use graphp\graph\GraphTypeBuilder;
+use graphp\graph\builder\GraphTypeBuilder;
 
 class DefaultGraphTypeTest extends TestCase
 {

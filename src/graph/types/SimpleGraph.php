@@ -7,14 +7,14 @@ use graphp\graph\builder\GraphTypeBuilder;
 use graphp\util\SupplierUtil;
 
 /**
- * Class DefaultDirectedGraph
+ * Class SimpleGraph
  *
  * @package graphp\graph\types
  */
-class DefaultDirectedGraph extends AbstractGraph
+class SimpleGraph extends AbstractGraph
 {
     /**
-     * Create a new default directed graph
+     * Create a new simple graph
      *
      * @param string $edgeClass - the edge class
      * @param SupplierInterface $vertexSupplier - the vertex supplier
@@ -28,10 +28,9 @@ class DefaultDirectedGraph extends AbstractGraph
         ?bool $weighted = null
     ) {
         $builder = new GraphTypeBuilder();
-        $graphType = $builder->directed()
-                    ->allowSelfLoops(true)
+        $graphType = $builder->undirected()
+                    ->allowSelfLoops(false)
                     ->allowMultipleEdges(false)
-                    ->allowCycles(false)
                     ->weighted($weighted)
                     ->build();
         if (!is_null($edgeClass)) {
@@ -52,7 +51,7 @@ class DefaultDirectedGraph extends AbstractGraph
     }
 
     /**
-     * Create a default directed graph builder
+     * Create a simple graph builder
      *
      * @param string $edgeClass - the edge class
      * @param SupplierInterface $edgeSupplier - the edge supplier
@@ -62,8 +61,8 @@ class DefaultDirectedGraph extends AbstractGraph
     public function createBuilder(?string $edgeClass = null, ?SupplierInterface $edgeSupplier = null): GraphBuilder
     {
         if (!is_null($edgeClass)) {
-            return new GraphBuilder(new DefaultDirectedGraph($edgeClass));
+            return new GraphBuilder(new SimpleGraph($edgeClass));
         }
-        return new GraphBuilder(new DefaultDirectedGraph(null, $edgeSupplier));
+        return new GraphBuilder(new SimpleGraph(null, $edgeSupplier));
     }
 }

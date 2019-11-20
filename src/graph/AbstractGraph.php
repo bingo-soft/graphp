@@ -3,6 +3,7 @@
 namespace graphp\graph;
 
 use InvalidArgumentException;
+use graphp\GraphInterface;
 use graphp\graph\specifics\SpecificsInterface;
 use graphp\graph\specifics\UndirectedSpecifics;
 use graphp\graph\specifics\DirectedSpecifics;
@@ -173,11 +174,11 @@ class AbstractGraph implements GraphInterface
             throw new InvalidArgumentException("loops are not allowed");
         }
         
-        $edgeSupplier = $this->edgeSupplier->get();
+        $targetEdge = $edge ?? $this->edgeSupplier->get();
 
-        if ($this->edgeSpecifics->add($edgeSupplier, $sourceVertex, $targetVertex)) {
-            $this->specifics->addEdgeToTouchingVertices($edgeSupplier);
-            return $edgeSupplier;
+        if ($this->edgeSpecifics->add($targetEdge, $sourceVertex, $targetVertex)) {
+            $this->specifics->addEdgeToTouchingVertices($targetEdge);
+            return $targetEdge;
         }
                 
         return null;

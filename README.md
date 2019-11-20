@@ -7,7 +7,15 @@
 
 # Graphp
 
-Graphp is a PHP library, which provides mathematical graph-theory objects and algorithms. 
+Graphp is a PHP library, which provides mathematical graph-theory objects and algorithms.
+
+# Installation
+
+Install Graphp, using Composer:
+
+```
+composer require bingo-soft/graphp
+```
 
 ## Acknowledgements
 

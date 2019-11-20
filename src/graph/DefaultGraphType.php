@@ -2,6 +2,8 @@
 
 namespace graphp\graph;
 
+use graphp\graph\builder\GraphTypeBuilder;
+
 /**
  * class DefaultGraphType
  *

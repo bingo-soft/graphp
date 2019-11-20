@@ -2,7 +2,7 @@
 
 namespace graphp\graph\specifics;
 
-use graphp\graph\GraphInterface;
+use graphp\GraphInterface;
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSetFactoryInterface;
 use graphp\edge\EdgeArraySetFactory;

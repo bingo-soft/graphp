@@ -3,7 +3,7 @@
 namespace tests\edge;
 
 use PHPUnit\Framework\TestCase;
-use graphp\graph\GraphBuilder;
+use graphp\graph\builder\GraphBuilder;
 use graphp\graph\specifics\DirectedSpecifics;
 use graphp\graph\specifics\UndirectedSpecifics;
 use graphp\graph\types\DefaultDirectedGraph;

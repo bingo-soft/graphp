@@ -1,7 +1,9 @@
 <?php
 
-namespace graphp\graph;
+namespace graphp\graph\builder;
 
+use graphp\GraphInterface;
+use graphp\GraphUtils;
 use graphp\edge\EdgeInterface;
 use graphp\vertex\VertexInterface;
 use graphp\vertex\VertexSet;

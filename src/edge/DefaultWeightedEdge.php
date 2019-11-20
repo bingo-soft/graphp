@@ -2,7 +2,7 @@
 
 namespace graphp\edge;
 
-use graphp\graph\GraphInterface;
+use graphp\GraphInterface;
 use graphp\vertex\VertexInterface;
 
 /**

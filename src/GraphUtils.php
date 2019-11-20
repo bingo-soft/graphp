@@ -1,6 +1,6 @@
 <?php
 
-namespace graphp\graph;
+namespace graphp;
 
 use InvalidArgumentException;
 use graphp\edge\EdgeInterface;
@@ -11,7 +11,7 @@ use graphp\vertex\VertexSet;
 /**
  * Class GraphUtils
  *
- * @package graphp\graph
+ * @package graphp
  */
 class GraphUtils
 {

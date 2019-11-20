@@ -3,7 +3,7 @@
 namespace graphp\edge\specifics;
 
 use BadMethodCallException;
-use graphp\graph\GraphInterface;
+use graphp\GraphInterface;
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSet;
 use graphp\vertex\VertexInterface;

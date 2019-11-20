@@ -1,8 +1,10 @@
 <?php
 
-namespace graphp\graph;
+namespace graphp\graph\builder;
 
 use InvalidArgumentException;
+use graphp\graph\DefaultGraphType;
+use graphp\graph\GraphTypeInterface;
 
 /**
  * class GraphTypeBuilder

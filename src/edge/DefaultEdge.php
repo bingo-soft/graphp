@@ -45,9 +45,9 @@ class DefaultEdge implements EdgeInterface
      *
      * @param EdgeInterface $other - other edge to be compared
      */
-    public function equals(EdgeInterface $other): bool
+    public function equals(?EdgeInterface $other = null): bool
     {
-        return $this->hash == $other->getHash();
+        return !is_null($other) && $this->hash == $other->getHash();
     }
 
     /**

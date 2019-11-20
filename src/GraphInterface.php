@@ -1,6 +1,6 @@
 <?php
 
-namespace graphp\graph;
+namespace graphp;
 
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSetFactoryInterface;
@@ -12,7 +12,7 @@ use graphp\util\SupplierInterface;
 /**
  * Interface GraphInterface
  *
- * @package graphp\graph
+ * @package graphp
  */
 interface GraphInterface
 {

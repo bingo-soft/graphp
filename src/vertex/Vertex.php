@@ -39,9 +39,9 @@ class Vertex implements VertexInterface
      *
      * @param VertexInterface $other - other vertex to be compared
      */
-    public function equals(VertexInterface $other): bool
+    public function equals(?VertexInterface $other = null): bool
     {
-        return $this->hash == $other->getHash();
+        return !is_null($other) && $this->hash == $other->getHash();
     }
     
     /**
