@@ -2,6 +2,7 @@
 
 namespace graphp;
 
+use graphp\graph\GraphTypeInterface;
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSetFactoryInterface;
 use graphp\edge\EdgeSet;
@@ -22,6 +23,13 @@ interface GraphInterface
      * @var float
      */
     public const DEFAULT_EDGE_WEIGHT = 1.0;
+
+    /**
+     * Get the graph type
+     *
+     * @return GraphTypeInterface
+     */
+    public function getType(): GraphTypeInterface;
 
     /**
      * Get all edges connecting the source vertext to the target vertex
@@ -217,5 +225,5 @@ interface GraphInterface
      * @param EdgeInterface $edge - the edge
      * @param float $weight - the edge weight
      */
-    public function setEdgeWeight(EdgeInterface $edge, float $weight): void;
+    public function setEdgeWeight(EdgeInterface $edge, ?float $weight = null): void;
 }

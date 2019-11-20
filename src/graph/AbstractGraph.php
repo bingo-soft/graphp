@@ -216,7 +216,7 @@ class AbstractGraph implements GraphInterface
         if (!is_null($sourceVertex) && !is_null($targetVertex)) {
             return !is_null($this->getEdge($sourceVertex, $targetVertex));
         }
-        return $this->edgeSpecifics->containsEdge($edge);
+        return !is_null($edge) ? $this->edgeSpecifics->containsEdge($edge) : false;
     }
 
     /**
@@ -431,7 +431,7 @@ class AbstractGraph implements GraphInterface
      * @param EdgeInterface $edge - the edge
      * @param float $weight - the edge weight
      */
-    public function setEdgeWeight(EdgeInterface $edge, float $weight): void
+    public function setEdgeWeight(EdgeInterface $edge, ?float $weight = null): void
     {
         $this->edgeSpecifics->setEdgeWeight($edge, $weight);
     }

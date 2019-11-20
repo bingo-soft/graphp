@@ -2,6 +2,7 @@
 
 namespace graphp;
 
+use Exception;
 use InvalidArgumentException;
 use graphp\edge\EdgeInterface;
 use graphp\edge\EdgeSet;
@@ -218,15 +219,11 @@ class GraphUtils
     /**
      * Get the vertex opposite another vertex across an edge.
      *
-     * @param g graph containing e and v
-     * @param e edge in g
-     * @param v vertex in g
-     * @param <V> the graph vertex type
-     * @param <E> the graph edge type
+     * @param GraphInterface $graph - the graph
+     * @param EdgeInterface $edge - the edge
+     * @param VertexInterface $vertex - the vertex
      *
-     * @return vertex opposite to v across e
-     *
-     * @throws InvalidArgumentException
+     * @return VertexInterface
      */
     public static function getOppositeVertex(
         GraphInterface $graph,
@@ -240,7 +237,7 @@ class GraphUtils
         } elseif ($vertex->equals($target)) {
             return $source;
         } else {
-            throw new InvalidArgumentException("no such vertex: " + $vertex);
+            throw new InvalidArgumentException("no such vertex: " . (string) $vertex);
         }
     }
 

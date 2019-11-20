@@ -4,7 +4,9 @@ namespace graphp\graph\types;
 
 use graphp\graph\AbstractGraph;
 use graphp\graph\builder\GraphTypeBuilder;
+use graphp\graph\builder\GraphBuilder;
 use graphp\util\SupplierUtil;
+use graphp\util\SupplierInterface;
 
 /**
  * Class SimpleDirectedGraph

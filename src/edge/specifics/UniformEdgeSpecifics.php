@@ -93,9 +93,9 @@ class UniformEdgeSpecifics implements EdgeSpecificsInterface
      *
      * @param EdgeInterface $edge - the edge
      *
-     * @return float
+     * @return null|float
      */
-    public function getEdgeWeight(EdgeInterface $edge): float
+    public function getEdgeWeight(EdgeInterface $edge): ?float
     {
         return GraphInterface::DEFAULT_EDGE_WEIGHT;
     }
@@ -108,7 +108,7 @@ class UniformEdgeSpecifics implements EdgeSpecificsInterface
      *
      * @throws BadMethodCallException
      */
-    public function setEdgeWeight(EdgeInterface $edge, float $weight): void
+    public function setEdgeWeight(EdgeInterface $edge, ?float $weight = null): void
     {
         throw new BadMethodCallException("Method is not supported by this type of edge");
     }

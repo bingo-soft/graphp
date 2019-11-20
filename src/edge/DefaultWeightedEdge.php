@@ -22,9 +22,9 @@ class DefaultWeightedEdge extends DefaultEdge
     /**
      * Get weight of the edge
      *
-     * @return mixed
+     * @return null|float
      */
-    public function getWeight(): float
+    public function getWeight(): ?float
     {
         return $this->weight;
     }
@@ -34,7 +34,7 @@ class DefaultWeightedEdge extends DefaultEdge
      *
      * @param float $weight - the edge weight
      */
-    public function setWeight(float $weight): void
+    public function setWeight(?float $weight = null): void
     {
         $this->weight = $weight;
     }
