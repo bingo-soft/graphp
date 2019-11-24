@@ -1,14 +1,14 @@
 <?php
 
-namespace tests\vertex;
+namespace tests\Vertex;
 
 use PHPUnit\Framework\TestCase;
-use graphp\graph\specifics\DirectedEdgeContainer;
-use graphp\graph\specifics\UndirectedEdgeContainer;
-use graphp\edge\EdgeArraySetFactory;
-use graphp\vertex\Vertex;
-use graphp\vertex\VertexMap;
-use graphp\vertex\VertexSet;
+use Graphp\Graph\Specifics\DirectedEdgeContainer;
+use Graphp\Graph\Specifics\UndirectedEdgeContainer;
+use Graphp\Edge\EdgeArraySetFactory;
+use Graphp\Vertex\Vertex;
+use Graphp\Vertex\VertexMap;
+use Graphp\Vertex\VertexSet;
 
 class VertexTest extends TestCase
 {

@@ -3,19 +3,19 @@
 namespace tests\edge;
 
 use PHPUnit\Framework\TestCase;
-use graphp\graph\DefaultGraphType;
-use graphp\graph\specifics\DirectedSpecifics;
-use graphp\graph\specifics\DirectedEdgeContainer;
-use graphp\graph\specifics\UndirectedSpecifics;
-use graphp\graph\specifics\UndirectedEdgeContainer;
-use graphp\graph\types\DefaultDirectedGraph;
-use graphp\graph\GraphUtils;
-use graphp\edge\DefaultEdge;
-use graphp\edge\DefaultWeightedEdge;
-use graphp\edge\specifics\UniformEdgeSpecifics;
-use graphp\edge\specifics\WeightedEdgeSpecifics;
-use graphp\vertex\Vertex;
-use graphp\util\Supplier;
+use Graphp\Graph\DefaultGraphType;
+use Graphp\Graph\Specifics\DirectedSpecifics;
+use Graphp\Graph\Specifics\DirectedEdgeContainer;
+use Graphp\Graph\Specifics\UndirectedSpecifics;
+use Graphp\Graph\Specifics\UndirectedEdgeContainer;
+use Graphp\Graph\Types\DefaultDirectedGraph;
+use Graphp\Graph\GraphUtils;
+use Graphp\Edge\DefaultEdge;
+use Graphp\Edge\DefaultWeightedEdge;
+use Graphp\Edge\Specifics\UniformEdgeSpecifics;
+use Graphp\Edge\Specifics\WeightedEdgeSpecifics;
+use Graphp\Vertex\Vertex;
+use Graphp\Util\Supplier;
 
 class GraphSpecificsTest extends TestCase
 {

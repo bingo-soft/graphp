@@ -1,18 +1,18 @@
 <?php
 
-namespace graphp;
+namespace Graphp;
 
 use Exception;
 use InvalidArgumentException;
-use graphp\edge\EdgeInterface;
-use graphp\edge\EdgeSet;
-use graphp\vertex\VertexInterface;
-use graphp\vertex\VertexSet;
+use Graphp\Edge\EdgeInterface;
+use Graphp\Edge\EdgeSet;
+use Graphp\Vertex\VertexInterface;
+use Graphp\Vertex\VertexSet;
 
 /**
  * Class GraphUtils
  *
- * @package graphp
+ * @package Graphp
  */
 class GraphUtils
 {

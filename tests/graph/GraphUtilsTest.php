@@ -1,17 +1,17 @@
 <?php
 
-namespace tests\edge;
+namespace tests\Graph;
 
 use PHPUnit\Framework\TestCase;
-use graphp\graph\DefaultGraphType;
-use graphp\GraphUtils;
-use graphp\graph\specifics\DirectedSpecifics;
-use graphp\graph\specifics\UndirectedSpecifics;
-use graphp\graph\types\DefaultDirectedGraph;
-use graphp\edge\DefaultEdge;
-use graphp\edge\DefaultWeightedEdge;
-use graphp\vertex\Vertex;
-use graphp\util\Supplier;
+use Graphp\Graph\DefaultGraphType;
+use Graphp\GraphUtils;
+use Graphp\Graph\Specifics\DirectedSpecifics;
+use Graphp\Graph\Specifics\UndirectedSpecifics;
+use Graphp\Graph\Types\DefaultDirectedGraph;
+use Graphp\Edge\DefaultEdge;
+use Graphp\Edge\DefaultWeightedEdge;
+use Graphp\Vertex\Vertex;
+use Graphp\Util\Supplier;
 
 class GraphUtilsTest extends TestCase
 {

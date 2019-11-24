@@ -3,8 +3,8 @@
 namespace tests\edge;
 
 use PHPUnit\Framework\TestCase;
-use graphp\graph\DefaultGraphType;
-use graphp\graph\builder\GraphTypeBuilder;
+use Graphp\Graph\DefaultGraphType;
+use Graphp\Graph\Builder\GraphTypeBuilder;
 
 class DefaultGraphTypeTest extends TestCase
 {

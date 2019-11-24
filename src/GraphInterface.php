@@ -1,19 +1,19 @@
 <?php
 
-namespace graphp;
+namespace Graphp;
 
-use graphp\graph\GraphTypeInterface;
-use graphp\edge\EdgeInterface;
-use graphp\edge\EdgeSetFactoryInterface;
-use graphp\edge\EdgeSet;
-use graphp\vertex\VertexInterface;
-use graphp\vertex\VertexSet;
-use graphp\util\SupplierInterface;
+use Graphp\Graph\GraphTypeInterface;
+use Graphp\Edge\EdgeInterface;
+use Graphp\Edge\EdgeSetFactoryInterface;
+use Graphp\Edge\EdgeSet;
+use Graphp\Vertex\VertexInterface;
+use Graphp\Vertex\VertexSet;
+use Graphp\Util\SupplierInterface;
 
 /**
  * Interface GraphInterface
  *
- * @package graphp
+ * @package Graphp
  */
 interface GraphInterface
 {
@@ -215,9 +215,9 @@ interface GraphInterface
      *
      * @param EdgeInterface $edge - the edge
      *
-     * @return float
+     * @return null|float
      */
-    public function getEdgeWeight(EdgeInterface $edge): float;
+    public function getEdgeWeight(EdgeInterface $edge): ?float;
     
     /**
      * Set the edge weight

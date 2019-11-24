@@ -1,13 +1,13 @@
 <?php
 
-namespace graphp;
+namespace Graphp;
 
-use graphp\vertex\VertexInterface;
+use Graphp\Vertex\VertexInterface;
 
 /**
  * Interface GraphPathInterface
  *
- * @package graphp
+ * @package Graphp
  */
 interface GraphPathInterface
 {

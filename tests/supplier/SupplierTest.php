@@ -1,12 +1,12 @@
 <?php
 
-namespace tests\vertex;
+namespace tests\Supplier;
 
 use PHPUnit\Framework\TestCase;
-use graphp\util\SupplierUtil;
-use graphp\util\Supplier;
-use graphp\edge\DefaultEdge;
-use graphp\edge\DefaultWeightedEdge;
+use Graphp\Util\SupplierUtil;
+use Graphp\Util\Supplier;
+use Graphp\Edge\DefaultEdge;
+use Graphp\Edge\DefaultWeightedEdge;
 
 class SupplierTest extends TestCase
 {

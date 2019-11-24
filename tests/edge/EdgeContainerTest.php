@@ -3,11 +3,11 @@
 namespace tests\edge;
 
 use PHPUnit\Framework\TestCase;
-use graphp\graph\specifics\DirectedEdgeContainer;
-use graphp\graph\specifics\UndirectedEdgeContainer;
-use graphp\edge\EdgeArraySetFactory;
-use graphp\edge\DefaultEdge;
-use graphp\vertex\Vertex;
+use Graphp\Graph\Specifics\DirectedEdgeContainer;
+use Graphp\Graph\Specifics\UndirectedEdgeContainer;
+use Graphp\Edge\EdgeArraySetFactory;
+use Graphp\Edge\DefaultEdge;
+use Graphp\Vertex\Vertex;
 
 class EdgeContainerTest extends TestCase
 {

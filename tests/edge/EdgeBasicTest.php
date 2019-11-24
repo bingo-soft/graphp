@@ -4,13 +4,13 @@ namespace tests\edge;
 
 use PHPUnit\Framework\TestCase;
 use BadMethodCallException;
-use graphp\edge\DefaultEdge;
-use graphp\edge\DefaultWeightedEdge;
-use graphp\edge\EdgeArraySetFactory;
-use graphp\edge\specifics\UniformEdgeSpecifics;
-use graphp\edge\specifics\WeightedEdgeSpecifics;
-use graphp\edge\EdgeSet;
-use graphp\vertex\Vertex;
+use Graphp\Edge\DefaultEdge;
+use Graphp\Edge\DefaultWeightedEdge;
+use Graphp\Edge\EdgeArraySetFactory;
+use Graphp\Edge\Specifics\UniformEdgeSpecifics;
+use Graphp\Edge\Specifics\WeightedEdgeSpecifics;
+use Graphp\Edge\EdgeSet;
+use Graphp\Vertex\Vertex;
 
 class EdgeBasicTest extends TestCase
 {

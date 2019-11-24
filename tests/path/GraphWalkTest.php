@@ -1,22 +1,22 @@
 <?php
 
-namespace tests\path;
+namespace tests\Path;
 
 use PHPUnit\Framework\TestCase;
 use InvalidArgumentException;
-use graphp\GraphUtils;
-use graphp\graph\types\{
+use Graphp\GraphUtils;
+use Graphp\Graph\Types\{
     Pseudograph,
     SimpleGraph,
     SimpleWeightedGraph,
     SimpleDirectedGraph,
     SimpleDirectedWeightedGraph
 };
-use graphp\edge\DefaultEdge;
-use graphp\edge\DefaultWeightedEdge;
-use graphp\vertex\Vertex;
-use graphp\vertex\VertexSet;
-use graphp\path\GraphWalk;
+use Graphp\Edge\DefaultEdge;
+use Graphp\Edge\DefaultWeightedEdge;
+use Graphp\Vertex\Vertex;
+use Graphp\Vertex\VertexSet;
+use Graphp\Path\GraphWalk;
 
 class GraphWalkTest extends TestCase
 {
