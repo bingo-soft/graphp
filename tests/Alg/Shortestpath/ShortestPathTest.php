@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\alg\shortestpath;
+namespace tests\Alg\Shortestpath;
 
 use PHPUnit\Framework\TestCase;
 use Graphp\GraphInterface;
@@ -11,7 +11,7 @@ use Graphp\Vertex\Vertex;
 use Graphp\Vertex\VertexSet;
 use Graphp\Alg\Shortestpath\DijkstraClosestFirstIterator;
 
-class ShortestPathTest extends TestCase
+abstract class ShortestPathTest extends TestCase
 {
     public static $V1;
     public static $V2;
