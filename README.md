@@ -17,6 +17,51 @@ Install Graphp, using Composer:
 composer require bingo-soft/graphp
 ```
 
+# Basic example
+
+```php
+use Graphp\Graph\Types\SimpleWeightedGraph;
+use Graphp\Edge\DefaultWeightedEdge;
+use Graphp\Vertex\Vertex;
+use Graphp\Alg\Shortestpath\DijkstraShortestPath;
+
+// Create vertices
+$v1 = new Vertex("v1");
+$v2 = new Vertex("v2");
+$v3 = new Vertex("v3");
+$v4 = new Vertex("v4");
+$v5 = new Vertex("v5");
+
+// Create a new graph and add vertices
+$graph = new SimpleWeightedGraph(DefaultWeightedEdge::class);
+$graph->addVertex($v1);
+$graph->addVertex($v2);
+$graph->addVertex($v3);
+$graph->addVertex($v4);
+$graph->addVertex($v5);
+
+// Add weighted edges to the graph
+$e12 = GraphUtils::addEdge($graph, $v1, $v2, 2.0);
+$e13 = GraphUtils::addEdge($graph, $v1, $v3, 3.0);
+$e24 = GraphUtils::addEdge($graph, $v2, $v4, 5.0);
+$e34 = GraphUtils::addEdge($graph, $v3, $v4, 20.0);
+$e45 = GraphUtils::addEdge($graph, $v4, $v5, 5.0);
+$e15 = GraphUtils::addEdge($graph, $v1, $v5, 100.0);
+
+// Find shortest path between v1 and v2 using Dijkstra shortest path algorithm. Returns [$e12]
+$path = (new DijkstraShortestPath($graph))->getPath($v1, $v2)->getEdgeList();
+
+// Returns [$e12, $e24]
+$path = (new DijkstraShortestPath($graph))->getPath($v1, $v4)->getEdgeList();
+
+// Returns [$e12, $e24, $e45]
+$path = (new DijkstraShortestPath($graph))->getPath($v1, $v5)->getEdgeList();
+
+// Returns [$e13, $e12, $e24]
+$path = (new DijkstraShortestPath($graph))->getPath($v3, $v4)->getEdgeList();
+```
+
+
 ## Acknowledgements
 
 Graphp draws inspiration from the [JGraphT](https://github.com/jgrapht/jgrapht) library.

@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\edge;
+namespace tests\Edge;
 
 use PHPUnit\Framework\TestCase;
 use Graphp\Graph\Specifics\DirectedEdgeContainer;
