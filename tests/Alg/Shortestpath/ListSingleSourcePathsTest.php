@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\alg\shortestpath;
+namespace tests\Alg\Shortestpath;
 
 use PHPUnit\Framework\TestCase;
 use Graphp\GraphUtils;
