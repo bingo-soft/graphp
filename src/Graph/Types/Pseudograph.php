@@ -30,7 +30,7 @@ class Pseudograph extends AbstractGraph
         ?bool $weighted = null
     ) {
         $builder = new GraphTypeBuilder();
-        $graphType = $builder->directed()
+        $graphType = $builder->undirected()
                     ->allowSelfLoops(true)
                     ->allowMultipleEdges(true)
                     ->weighted($weighted)

@@ -41,7 +41,7 @@ interface SingleSourcePathsInterface
      *
      * @param VertexInterface $targetVertex - the target vertex
      *
-     * @return GraphPathInterface
+     * @return null|GraphPathInterface
      */
-    public function getPath(VertexInterface $targetVertex): GraphPathInterface;
+    public function getPath(VertexInterface $targetVertex): ?GraphPathInterface;
 }

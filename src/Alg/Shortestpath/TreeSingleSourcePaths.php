@@ -91,13 +91,13 @@ class TreeSingleSourcePaths implements SingleSourcePathsInterface
     }
 
     /**
-     * Return the path from the source vertex to the target vertex
+     * Get the path from the source vertex to the target vertex
      *
      * @param VertexInterface $targetVertex - the target vertex
      *
-     * @return GraphPathInterface
+     * @return null|GraphPathInterface
      */
-    public function getPath(VertexInterface $targetVertex): GraphPathInterface
+    public function getPath(VertexInterface $targetVertex): ?GraphPathInterface
     {
         if ($this->source->equals($targetVertex)) {
             return GraphWalk::singletonWalk($this->graph, $this->source, 0.0);

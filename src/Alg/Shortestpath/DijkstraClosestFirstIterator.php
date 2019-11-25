@@ -10,6 +10,7 @@ use Graphp\GraphInterface;
 use Graphp\GraphUtils;
 use Graphp\Edge\EdgeInterface;
 use Graphp\Vertex\VertexInterface;
+use Graphp\Util\Supplier;
 use Graphp\Alg\Interfaces\SingleSourcePathsInterface;
 
 /**
@@ -114,14 +115,14 @@ class DijkstraClosestFirstIterator
         }
 
         // settle next node
-        $vNode = $heap->deleteMin();
+        $vNode = $this->heap->deleteMin();
         $v = $vNode->getValue()[0];
         $vDistance = $vNode->getKey();
-
+        
         // relax edges
         $edges = $this->graph->outgoingEdgesOf($v);
         foreach ($edges as $edge) {
-            $u = GraphUtils::getOppositeVertex($this->graph, $edge, $vertex);
+            $u = GraphUtils::getOppositeVertex($this->graph, $edge, $v);
             $eWeight = $this->graph->getEdgeWeight($edge);
             if ($eWeight < 0.0) {
                 throw new InvalidArgumentException("Negative edge weight not allowed");
@@ -172,7 +173,7 @@ class DijkstraClosestFirstIterator
      * @param EdgeInterface $e - the predecessor edge
      * @param float $distance - the new distance
      */
-    private function updateDistance(VertexInterface $v, EdgeInterface $e, float $distance): void
+    private function updateDistance(VertexInterface $v, ?EdgeInterface $e = null, float $distance): void
     {
         $id = $v->getHash();
         if (!array_key_exists($id, $this->seen)) {

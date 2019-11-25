@@ -13,14 +13,14 @@ use Graphp\GraphPathInterface;
 interface ShortestPathAlgorithmInterface
 {
     /**
-     * Get the shortest path from the source vertex to the target vertex.
+     * Get the path from the source vertex to the target vertex
      *
-     * @param VertexInterface $sourceVertex - the source vertex
-     * @param VertexInterface $targetVertex - the target vertex
+     * @param VertexInterface $source - the source vertex
+     * @param VertexInterface $sink - the target vertex
      *
-     * @return GraphPathInterface
+     * @return null|GraphPathInterface
      */
-    public function getPath(VertexInterface $sourceVertex, VertexInterface $targetVertex): GraphPathInterface;
+    public function getPath(VertexInterface $source, VertexInterface $sink): ?GraphPathInterface;
     
     /**
      * Get the weight of the path from the source vertex to the target vertex.
