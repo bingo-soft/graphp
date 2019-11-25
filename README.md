@@ -20,6 +20,7 @@ composer require bingo-soft/graphp
 # Basic example
 
 ```php
+use Graphp\GraphUtils;
 use Graphp\Graph\Types\SimpleWeightedGraph;
 use Graphp\Edge\DefaultWeightedEdge;
 use Graphp\Vertex\Vertex;
