@@ -61,6 +61,22 @@ $path = (new DijkstraShortestPath($graph))->getPath($v1, $v5)->getEdgeList();
 $path = (new DijkstraShortestPath($graph))->getPath($v3, $v4)->getEdgeList();
 ```
 
+## Features
+
+* Graph types
+    * Simple graph
+    * Simple weighted graph
+    * Simple directed graph
+    * Simple directed weighted graph
+    * ...
+    
+* Algorithms
+    * Shortest path algorithms
+        * Dijkstra shortest path
+
+## Dependencies
+
+Graphp depends on [Heap](https://github.com/bingo-soft/heap) library.
 
 ## Acknowledgements
 
