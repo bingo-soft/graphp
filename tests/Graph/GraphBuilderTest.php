@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\edge;
+namespace tests\Graph;
 
 use PHPUnit\Framework\TestCase;
 use Graphp\Graph\Builder\GraphBuilder;
